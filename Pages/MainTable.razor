@@ -1,0 +1,44 @@
+﻿<h3>MainTable</h3>
+@page "/maintable"
+
+
+@using LoadManager.Data
+@using LoadManager.Model.DataModels;
+@inject FileRootService fileRootService
+
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Plan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.FileName.ToString()</td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private FileRoot[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {   
+        forecasts = await fileRootService.GetFileRootsAsynch();
+    }
+}
