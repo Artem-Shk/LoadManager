@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using LoadManager.Hubs;
+using LoadManager.Model;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<FileRootService>();
 builder.Services.AddSingleton<WeatherForecastService>();
-
+builder.Services.AddDbContext<AspNetUsersContext>();
 builder.Services.AddResponseCompression(opts =>
 {
 	opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
