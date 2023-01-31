@@ -7,23 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\admin_database_viewer.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\admin_database_viewer.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\admin_database_viewer.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\admin_database_viewer.cshtml" />
   </ItemGroup>
 
 </Project>

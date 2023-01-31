@@ -1,0 +1,81 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+    display: flex;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+    .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 15px 29px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 100px;
+    grid-gap: 10px;
+}
+
+#navigation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10em;
+}
+
+.portfolio {
+    display: grid;
+    width: 30%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    background-color: #EBEBEB;
+    min-width: 35vh;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+    .portfolio div.image {
+        display: flex;
+        margin-top: 15px;
+        margin-right: 50px;
+        margin-left: 50px;
+        min-height: 20vh;
+        background-color: #f2f2f2;
+    }
+
+    .portfolio div.text {
+        float: right;
+        margin-top: 15px;
+        margin-right: 5px;
+        margin-left: 5px;
+        background-color: #f2f2f2;
+    }
+
+.infobox {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 10px;
+}
+

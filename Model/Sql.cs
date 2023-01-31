@@ -9,23 +9,25 @@ namespace LoadManager.Model
 
         private readonly static string _connection_string = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        private SqlConnection connection = new SqlConnection(_connection_string);
-        private SqlCommand command;
-        private SqlDataReader reader;
-        private string query;
-        private List<object> output = new List<Object>();
-        private SqlDataAdapter adapter= new SqlDataAdapter();
+        private readonly SqlConnection connection = new(_connection_string);
+        private SqlCommand? command;
+        private SqlDataReader? reader;
+        private string? query;
+        private readonly List<object> output = new ();
+        private readonly SqlDataAdapter adapter= new ();
 
         public Sql()
         {
             connection.Open();
-        }
+			
+		}
         public List<FileRoot> SelectFromFileRoot()
         {
-            query = "SELECT TOP (1000) [Id],[filename]FROM [loadManagerDB].[dbo].[mainTb]";
+			
+			query = "SELECT TOP (1000) [Id],[filename]FROM [loadManagerDB].[dbo].[mainTb]";
             command = new SqlCommand(query, connection);
-            reader = command.ExecuteReader();
-            while (reader.Read())
+			reader = command.ExecuteReader();
+			while (reader.Read())
             {
                 FileRoot result = new(reader.GetString(1));
                 output.Add(result);
@@ -34,7 +36,7 @@ namespace LoadManager.Model
             reader.Close();
             command.Dispose();
             connection.Close();
-            foreach(FileRoot ou in output)
+            foreach(FileRoot ou in output.Cast<FileRoot>())
             {
                 Debug.WriteLine(ou);
             }
