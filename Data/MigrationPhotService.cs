@@ -157,18 +157,25 @@ namespace LoadManager.Data
 		private string sds = "Gatter23D";
 		public string[]? allfiles;
 		private string _photoSource = @"\\cons/PlanyMini/Photo1/";
-		public void check(List<string> neededFiles)
+		public Task<string> check(List<string> neededFiles)
 		{
 			NetworkShare.DisconnectFromShare(_photoSource, true);
 			NetworkShare.ConnectToShare(_photoSource, "shakrislanov.a", sds);
-
-			allfiles = Directory.GetFiles(_photoSource);
-			foreach (string filename in allfiles)
+			//TODO сделать оптимизацию чтобы брало один файл и не пришлось искать эту залупу а ешё вывести в отдельный поток
+			
+			foreach (string file in neededFiles)
 			{
+				string? filename = Path.GetFileName("\\"+_photoSource + file);
 				if (neededFiles.Contains(filename))
 				{
-					Debug.WriteLine(filename);
+
+					return Task.FromResult(filename);
 				}
+				else
+				{
+					return null;
+				}
+
 
 				
 		
