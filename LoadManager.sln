@@ -9,6 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlTesting", "..\SqlTesting
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorPagesPizza", "..\mslearn-secure-aspnet-core-identity\RazorPagesPizza\RazorPagesPizza.csproj", "{ABFD9800-4909-4B36-AA7A-6D85EBD6398B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4320C579-6DD9-4C09-A84C-27E9E4CF2F16}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

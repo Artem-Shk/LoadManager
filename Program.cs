@@ -6,6 +6,7 @@ using LoadManager.Hubs;
 using LoadManager.Model;
 using Microsoft.Extensions.Configuration;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

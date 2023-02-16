@@ -19,9 +19,4 @@ public partial class DecanatContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Data Source=sql;Database=деканат;Trusted_Connection=True;Persist Security Info=False;User ID=SFRUDN\\shakrislanov.a;Integrated Security=True;TrustServerCertificate=True;");
-
-  
-
-        
-    
 }
