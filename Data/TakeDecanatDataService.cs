@@ -6,16 +6,27 @@ namespace LoadManager.Data
     public class TakeDecanatDataService
     {
 
-        public Task<portfolio[]> GetPhotosName()
+        public async Task<portfolio[]> GetPhotosObject()
         {
             using(DecanatContext db = new DecanatContext())
             {
-                return Task.FromResult(db
+                return await Task.FromResult(db
                     .Преподаватели
-                    .Where(u => u.ФайлФото != null).Select(column => new portfolio(column.Код, column.Фио, column.ФайлФото))
+                    .Where(u => u.ФайлФото != null & u.Логин != null).Select(column => new portfolio(column.Код, column.Фио, column.ФайлФото, column.Логин))
                     .ToArray());
                     
             }
-        } 
-    }
+        }
+		public async Task<List<string>> GetPhotosName()
+		{
+			using (DecanatContext db = new DecanatContext())
+			{
+				return await Task.FromResult(db
+					.Преподаватели
+					.Where(u => u.ФайлФото != null).Select(column => column.ФайлФото)
+					.ToList<string>());
+
+			}
+		}
+	}
 }

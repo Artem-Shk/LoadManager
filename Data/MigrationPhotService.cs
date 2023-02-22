@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace LoadManager.Data
@@ -6,65 +7,75 @@ namespace LoadManager.Data
 
 	public class MigrationPhotService
 	{
-
-		private DataFile _dataFile;
+		private List<DataFile> _dataFile = new List<DataFile>();
 		private string _photoSource = @"\\cons/PlanyMini/Photo1/";
-		private Dictionary<string, string> levels = new Dictionary<string, string>()
-  {{"Неудвл","Неудоволетворительно"},
-		{"Удовл","Удоволетворительно"},
-		  {"Хор","Хорошо"},
-			  {"Отл","Отлично"}};
-
 		public struct DataFile
 		{
 			public string? filename;
 			public byte[]? buffer;
 		}
-		public Task<bool> CheckAsync(List<string> neededFiles, string PcLogin,string pass)
+
+
+		public void ConnectToServer(string PcLogin, string pass)
 		{
 			NetworkShare.DisconnectFromShare(_photoSource, true);
 			NetworkShare.ConnectToShare(_photoSource, PcLogin, pass);
 
+		}
+
+		private void set__dataFilename(string filename)
+		{
+		    
+			_dataFile.Add(new DataFile { filename = filename, buffer = SaveToBuffer(filename) });
+			
+			NetworkShare.DisconnectFromShare(_photoSource, true);
+		}
+
+
+		public async Task<bool> CheckAsync(List<string> neededFiles, string PcLogin, string pass)
+		{
+
+			ConnectToServer("shakrislanov.a", "Gatter23D");
 			foreach (string file in neededFiles)
 			{
 				string? filename = Path.GetFileName("\\" + _photoSource + file);
-				if (neededFiles.Contains(filename))
+				if (file == filename)
 				{
-					_dataFile.filename = _photoSource + file;
-					NetworkShare.DisconnectFromShare(_photoSource, true);
-					return Task.FromResult(true);
+					set__dataFilename(_photoSource + file);
+					return await Task.FromResult(true);
+
 				}
+				
 			}
-			return (Task.FromResult(false));
+			return await (Task.FromResult(false));
 		}
-		public bool SaveToBuffer()
+
+
+		public byte[] SaveToBuffer(string filename)
 		{
+
 
 			try
 			{
-				byte[] buffer = File.ReadAllBytes(_dataFile.filename);
-				_dataFile.buffer = buffer;
-				return true;
+				byte[] buffer = File.ReadAllBytes(filename);
+				return buffer;
 			}
 			catch (Exception error)
 			{
-				Console.WriteLine(error.Message + "SaveToBufferError");
-				return false;
-			{
-
-				}
+				throw new Exception(error + "saveTobufferShit");
 			}
 		}
 
-		public async Task<DataFile> Procedure(List<string> neededFiles, string PcLogin, string pass)
+		public async Task<DataFile[]> Procedure(List<string> neededFiles, string PcLogin, string pass,string name)
 		{
-			
-			await CheckAsync(neededFiles,PcLogin,pass);
-			SaveToBuffer();
-			return _dataFile;
+
+			await CheckAsync(neededFiles, PcLogin, pass);
+
+			return _dataFile.ToArray();
 		}
 	}
-}
+} 
+
 
 
 

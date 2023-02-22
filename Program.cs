@@ -20,6 +20,9 @@ builder.Services.AddResponseCompression(opts =>
 	opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
 		new[] { "application/octet-stream" });
 });
+//builder.Services.AddHostedService<>();
+//TODO make a preload db
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
